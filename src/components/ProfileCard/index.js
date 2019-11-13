@@ -10,9 +10,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'stretch',
-    borderRadius: 5,
-    overflow: 'hidden',
-    maxHeight: 350
+    borderRadius: 8,
+    overflow: 'hidden'
   },
   primaryContainer: {
     flex: 2,

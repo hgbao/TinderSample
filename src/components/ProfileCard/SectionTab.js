@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
   tabContainer: {
     flexDirection: 'row',
     position: 'absolute',
-    bottom: 10
+    bottom: 18
   },
   tabIcon: {
     marginHorizontal: 4,

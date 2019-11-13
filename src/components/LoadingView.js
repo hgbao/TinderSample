@@ -7,13 +7,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    backgroundColor: AppColors.background
   }
 });
 
-const LoadingView = () => {
+const LoadingView = ({ opacity = 1 }) => {
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { opacity: opacity }]}>
       <ActivityIndicator size="large" color={AppColors.border} />
     </View>
   );
