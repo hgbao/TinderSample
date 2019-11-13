@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
   }
 });
 
-const LoadingScreen = () => {
+const LoadingView = () => {
   return (
     <View style={styles.container}>
       <ActivityIndicator size="large" color={AppColors.border} />
@@ -19,4 +19,4 @@ const LoadingScreen = () => {
   );
 };
 
-export default LoadingScreen;
+export default LoadingView;
