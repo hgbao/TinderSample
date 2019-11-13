@@ -3,13 +3,14 @@ import { Image } from 'react-native';
 import { createAppContainer, SafeAreaView } from 'react-navigation';
 import { createMaterialTopTabNavigator } from 'react-navigation-tabs';
 
-import LoadingView from '@components/LoadingView';
+import ExploreView from '@containers/ExploreView';
+import FavoriteView from '@containers/FavoriteView';
 import { AppColors } from '@theme';
 
 const AppNavigator = createMaterialTopTabNavigator(
   {
     Explore: {
-      screen: LoadingView,
+      screen: ExploreView,
       navigationOptions: {
         tabBarIcon: ({ tintColor }) => {
           return <Image source={require('@images/ChatIcon.png')} style={{ tintColor }} />;
@@ -17,7 +18,7 @@ const AppNavigator = createMaterialTopTabNavigator(
       }
     },
     FavoriteView: {
-      screen: LoadingView,
+      screen: FavoriteView,
       navigationOptions: {
         tabBarIcon: ({ tintColor }) => {
           return <Image source={require('@images/FavoriteIcon.png')} style={{ tintColor }} />;
