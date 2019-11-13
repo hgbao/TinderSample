@@ -19,7 +19,10 @@ export function reloadData(results = UserDefaultSettings.backgroundProfiles) {
 
     return dispatch({
       type: types.LOAD_DATA,
-      data: response.data
+      data: {
+        results: response.data.results,
+        removeExistence: true
+      }
     });
   };
 }

@@ -9,9 +9,9 @@ const initialState = {
 export default function userReducer(state = initialState, action) {
   switch (action.type) {
     case types.LOAD_DATA: {
-      const { results } = action.data;
+      const { results, removeExistence = false } = action.data;
 
-      const newProfileById = {};
+      const newProfileById = removeExistence ? {} : { ...state.newProfileById };
       results.forEach(profile => {
         const { user } = profile;
         newProfileById[user.sha1] = {
