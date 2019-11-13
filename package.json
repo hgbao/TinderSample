@@ -8,6 +8,7 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
+    "eslint": "./node_modules/.bin/eslint",
     "lint": "eslint .",
     "lint-staged": "./node_modules/.bin/lint-staged"
   },
