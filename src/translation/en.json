@@ -1,1 +1,8 @@
-{}
+{
+  "error": "Error",
+  "error-unknown-error": "Unknown error",
+  "info-name": "My name is",
+  "info-dob": "My birthday is",
+  "info-address": "My address is",
+  "info-phone": "My phone number is"
+}
