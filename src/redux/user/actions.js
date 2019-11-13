@@ -5,11 +5,12 @@ import UserDefaultSettings from '@constants/user';
 
 export const types = {
   LOAD_DATA: 'LOAD_DATA',
+  CLEAN_DATA: 'CLEAN_DATA',
   REMOVE_PROFILE: 'REMOVE_PROFILE',
   ADD_PROFILE: 'ADD_PROFILE'
 };
 
-export function loadData({ results = UserDefaultSettings.backgroundProfiles, clearExistence = false }) {
+export function reloadData(results = UserDefaultSettings.backgroundProfiles) {
   return async dispatch => {
     const response = await fetchGet(`${UserEndPoints.LOAD_DATA}?results=${results}`);
     if (!response.ok) {
@@ -18,12 +19,17 @@ export function loadData({ results = UserDefaultSettings.backgroundProfiles, cle
 
     return dispatch({
       type: types.LOAD_DATA,
-      data: {
-        results: response.data.results,
-        clearExistence: clearExistence
-      }
+      data: response.data
     });
   };
+}
+
+export function cleanData() {
+  return async dispatch => {
+    return dispatch({
+      type: types.CLEAN_DATA
+    });
+  }
 }
 
 export function removeProfile(profileId) {

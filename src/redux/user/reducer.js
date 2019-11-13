@@ -2,16 +2,16 @@ import { types } from './actions';
 
 const initialState = {
   newProfileById: {},
-  favoriteProfileById: {}
+  favoriteProfileById: {},
+  removeProfileIds: []
 };
 
 export default function userReducer(state = initialState, action) {
   switch (action.type) {
     case types.LOAD_DATA: {
-      const { results, clearExistence } = action.data;
+      const { results } = action.data;
 
-      const newProfileById = clearExistence ? {} : { ...state.newProfileById };
-
+      const newProfileById = {};
       results.forEach(profile => {
         const { user } = profile;
         newProfileById[user.sha1] = {
@@ -30,21 +30,40 @@ export default function userReducer(state = initialState, action) {
       };
     }
 
-    case types.ADD_PROFILE: {
-      const { profileId } = action.data;
-
+    case types.CLEAN_DATA: {
+      const { removeProfileIds } = state;
       const newProfileById = { ...state.newProfileById };
-      const favoriteProfileById = { ...state.favoriteProfileById };
 
-      if (newProfileById[profileId]) {
-        favoriteProfileById[profileId] = JSON.parse(JSON.stringify(newProfileById[profileId]));
-        delete newProfileById[profileId];
+      for (let i = 0; i < removeProfileIds.length; i++) {
+        if (newProfileById[removeProfileIds[i]]) {
+          delete newProfileById[removeProfileIds[i]];
+        }
       }
 
       return {
         ...state,
         newProfileById: newProfileById,
-        favoriteProfileById: favoriteProfileById
+        removeProfileIds: []
+      };
+    }
+
+    case types.ADD_PROFILE: {
+      const { profileId } = action.data;
+
+      const newProfileById = { ...state.newProfileById };
+      const favoriteProfileById = { ...state.favoriteProfileById };
+      const removeProfileIds = [...state.removeProfileIds];
+
+      if (newProfileById[profileId]) {
+        favoriteProfileById[profileId] = JSON.parse(JSON.stringify(newProfileById[profileId]));
+        removeProfileIds.push(profileId);
+      }
+
+      return {
+        ...state,
+        newProfileById: newProfileById,
+        favoriteProfileById: favoriteProfileById,
+        removeProfileIds: removeProfileIds
       };
     }
 
@@ -52,14 +71,16 @@ export default function userReducer(state = initialState, action) {
       const { profileId } = action.data;
 
       const newProfileById = { ...state.newProfileById };
+      const removeProfileIds = [...state.removeProfileIds];
 
       if (newProfileById[profileId]) {
-        delete newProfileById[profileId];
+        removeProfileIds.push(profileId);
       }
 
       return {
         ...state,
-        newProfileById: newProfileById
+        newProfileById: newProfileById,
+        removeProfileIds: removeProfileIds
       };
     }
 
