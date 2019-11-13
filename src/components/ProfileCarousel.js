@@ -3,7 +3,7 @@ import { StyleSheet, View } from 'react-native';
 import Swiper from 'react-native-deck-swiper';
 
 import ProfileCard from '@components/ProfileCard';
-import LoadingScreen from '@components/LoadingScreen';
+import LoadingView from '@components/LoadingView';
 import { AppColors } from '@theme';
 
 const styles = StyleSheet.create({
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
 const ProfileCarousel = ({ profiles, onRemoveProfile, onAddProfile }) => {
   const _renderSwiper = useMemo(() => {
     if (!profiles.length) {
-      return <LoadingScreen />;
+      return <LoadingView />;
     }
 
     return (
