@@ -8,7 +8,8 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "lint-staged": "./node_modules/.bin/lint-staged"
   },
   "dependencies": {
     "react": "16.9.0",
@@ -30,11 +31,21 @@
     "eslint-plugin-react": "^7.16.0",
     "eslint-plugin-react-hooks": "^2.2.0",
     "eslint-plugin-react-native": "^3.8.1",
+    "husky": "^3.0.9",
     "jest": "^24.9.0",
+    "lint-staged": "^9.4.2",
     "metro-react-native-babel-preset": "^0.57.0",
     "react-test-renderer": "16.9.0"
   },
   "jest": {
     "preset": "react-native"
+  },
+  "husky": {
+    "hooks": {
+      "pre-push": "yarn lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": "eslint"
   }
 }
