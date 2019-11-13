@@ -63,10 +63,18 @@ const ExploreView = () => {
   const onAddProfile = useCallback(profileId => dispatch(addProfile(profileId)), [dispatch]);
 
   useEffect(() => {
-    dispatch(reloadData())
-      .then(() => setIsLoading(false))
-      .catch(error => Alert.alert(LanguageConfig.translate('error'), error.message || error.problem));
-    return dispatch(cleanData());
+    const fetchProfileData = async () => {
+      await dispatch(reloadData())
+        .then(() => setIsLoading(false))
+        .catch(error => Alert.alert(LanguageConfig.translate('error'), error.message || error.problem));
+    };
+    fetchProfileData();
+
+    const cleanupData = () => {
+      dispatch(cleanData());
+    };
+
+    return cleanData();
   }, []);
 
   const _renderProfileBlock = useMemo(() => {
